@@ -307,7 +307,7 @@ MonoBehaviour:
   aspectRatio: 4.72727251
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 'Column Padding:'
   mFontSize: 20
   mFontStyle: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 2.89189196
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Highlight - Shadowed
   mType: 1
   mFillDirection: 4
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   aspectRatio: 4.33333349
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 10
   mFontSize: 20
   mFontStyle: 0
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   aspectRatio: 4.5999999
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: Options
   mFontSize: 20
   mFontStyle: 0
@@ -1322,7 +1322,7 @@ MonoBehaviour:
   aspectRatio: 4.33333349
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 2
   mFontSize: 20
   mFontStyle: 0
@@ -1618,7 +1618,7 @@ MonoBehaviour:
   aspectRatio: 2.86363626
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 10
   mFontSize: 20
   mFontStyle: 0
@@ -1711,7 +1711,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .944444418
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Checkmark
   mType: 0
   mFillDirection: 4
@@ -1842,7 +1842,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 2.07894731
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Highlight - Shadowed
   mType: 1
   mFillDirection: 4
@@ -1960,7 +1960,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .524886906
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Button
   mType: 1
   mFillDirection: 4
@@ -3072,7 +3072,7 @@ MonoBehaviour:
   aspectRatio: 2.090909
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: OK
   mFontSize: 20
   mFontStyle: 0
@@ -3602,7 +3602,7 @@ MonoBehaviour:
   aspectRatio: 4.72727251
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 'Num Rows:'
   mFontSize: 20
   mFontStyle: 0
@@ -3690,7 +3690,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Highlight - Shadowed
   mType: 1
   mFillDirection: 4
@@ -3777,8 +3777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e428c9b6087304da439ec665b56a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
-  bitmapFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  atlas: {fileID: 0}
+  bitmapFont: {fileID: 0}
   trueTypeFont: {fileID: 0}
   fontSize: 20
   fontStyle: 0
@@ -3846,7 +3846,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 4.0999999
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Button
   mType: 1
   mFillDirection: 4
@@ -3924,7 +3924,7 @@ MonoBehaviour:
   aspectRatio: 4.86363649
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: Gravity
   mFontSize: 20
   mFontStyle: 0
@@ -4013,7 +4013,7 @@ MonoBehaviour:
   aspectRatio: 4.33333349
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 2
   mFontSize: 20
   mFontStyle: 0
@@ -4090,7 +4090,7 @@ MonoBehaviour:
   aspectRatio: 4.72727251
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 'Row Padding:'
   mFontSize: 20
   mFontStyle: 0
@@ -4189,7 +4189,7 @@ MonoBehaviour:
   aspectRatio: 4.72727251
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 'Tile Width:'
   mFontSize: 20
   mFontStyle: 0
@@ -4277,7 +4277,7 @@ MonoBehaviour:
   aspectRatio: 4.5999999
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 'Gravity:'
   mFontSize: 20
   mFontStyle: 0
@@ -4408,7 +4408,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 2.89189196
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Highlight - Shadowed
   mType: 1
   mFillDirection: 4
@@ -4528,7 +4528,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 2.89189196
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Highlight - Shadowed
   mType: 1
   mFillDirection: 4
@@ -4606,7 +4606,7 @@ MonoBehaviour:
   aspectRatio: 4.33333349
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 32
   mFontSize: 20
   mFontStyle: 0
@@ -4737,7 +4737,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 2.89189196
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Highlight - Shadowed
   mType: 1
   mFillDirection: 4
@@ -4815,7 +4815,7 @@ MonoBehaviour:
   aspectRatio: 4.44444466
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: Fill Empty Tiles
   mFontSize: 20
   mFontStyle: 0
@@ -5114,7 +5114,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 2.89189196
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Highlight - Shadowed
   mType: 1
   mFillDirection: 4
@@ -5412,7 +5412,7 @@ MonoBehaviour:
   aspectRatio: 4.72727251
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 'Tile Height:'
   mFontSize: 20
   mFontStyle: 0
@@ -5603,7 +5603,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.79999995
-  mAtlas: {fileID: 11400000, guid: 62adb30369acbf943a67cee0f69267a3, type: 2}
+  mAtlas: {fileID: 0}
   mSpriteName: Button
   mType: 1
   mFillDirection: 4
@@ -5694,7 +5694,7 @@ MonoBehaviour:
   aspectRatio: 4.33333349
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 32
   mFontSize: 20
   mFontStyle: 0
@@ -5782,7 +5782,7 @@ MonoBehaviour:
   aspectRatio: 5.5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mFont: {fileID: 0}
   mText: 'Num Columns:'
   mFontSize: 20
   mFontStyle: 0
