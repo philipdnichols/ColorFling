@@ -8,6 +8,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(TileGridUpdateManager))]
 public class TileGridManager : MonoBehaviour {
 	public GameManager gameManager;
+	public ColorManager colorManager;
 
 	public int numRows = 24;
 	public int numColumns = 12;
@@ -19,8 +20,6 @@ public class TileGridManager : MonoBehaviour {
 	public int columnPadding = 2;
 
 	public GameObject tilePrefab;
-
-	public Color[] tileColors;
 
 	Tile[,] tiles;
 
@@ -92,14 +91,9 @@ public class TileGridManager : MonoBehaviour {
 		for (int y = 0; y < numRows; y++) {
 			for (int x = 0; x < numColumns; x++) {
 				Tile tile = GetTileAt(x, y);
-				RandomizeTileColor(tile);
+				tile.Color = colorManager.RandomColor();
 			}
 		}
-	}
-
-	public void RandomizeTileColor(Tile tile) {
-		Color randomTileColor = tileColors[Random.Range(0, tileColors.Length)];
-		tile.Color = randomTileColor;
 	}
 
 	public void UpdateTileGridManager() {

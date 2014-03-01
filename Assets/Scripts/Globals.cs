@@ -18,6 +18,8 @@ public class Globals : Singleton<Globals> {
 
 	void Start() {
 		mainCamera = Camera.main;
+
+		UpdateWorldVariables();
 	}
 	
 	// (optional) allow runtime registration of global objects
@@ -27,6 +29,15 @@ public class Globals : Singleton<Globals> {
 
 	// Update is called once per frame
 	void Update() {
+		UpdateWorldVariables();
+
+		Debug.DrawLine(WORLD_TOP_LEFT_POINT, WORLD_TOP_RIGHT_POINT);
+		Debug.DrawLine(WORLD_TOP_LEFT_POINT, WORLD_BOTTOM_LEFT_POINT);
+		Debug.DrawLine(WORLD_BOTTOM_LEFT_POINT, WORLD_BOTTOM_RIGHT_POINT);
+		Debug.DrawLine(WORLD_TOP_RIGHT_POINT, WORLD_BOTTOM_RIGHT_POINT);
+	}
+
+	void UpdateWorldVariables() {
 		WORLD_TOP_LEFT_POINT = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, Screen.height, 0.0f));
 		WORLD_TOP_RIGHT_POINT = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
 		WORLD_BOTTOM_LEFT_POINT = mainCamera.ScreenToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f));
@@ -34,10 +45,20 @@ public class Globals : Singleton<Globals> {
 		
 		WORLD_WIDTH = Mathf.Abs(WORLD_TOP_RIGHT_POINT.x - WORLD_TOP_LEFT_POINT.x);
 		WORLD_HEIGHT = Mathf.Abs(WORLD_BOTTOM_LEFT_POINT.y - WORLD_TOP_LEFT_POINT.y);
+	}
 
-		Debug.DrawLine(WORLD_TOP_LEFT_POINT, WORLD_TOP_RIGHT_POINT);
-		Debug.DrawLine(WORLD_TOP_LEFT_POINT, WORLD_BOTTOM_LEFT_POINT);
-		Debug.DrawLine(WORLD_BOTTOM_LEFT_POINT, WORLD_BOTTOM_RIGHT_POINT);
-		Debug.DrawLine(WORLD_TOP_RIGHT_POINT, WORLD_BOTTOM_RIGHT_POINT);
+	// TODO
+	public static class Tags {
+		public static string TILE =			"Tile";
+		public static string TILE_GROUP =	"TileGroup";
+		public static string BUCKET = 		"Bucket";
+	}
+
+	public static class SortingLayers {
+		
+	}
+
+	public static class Layers {
+
 	}
 }

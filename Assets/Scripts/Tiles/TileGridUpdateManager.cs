@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 
@@ -8,9 +8,11 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(TileAnimationManager))]
 [RequireComponent(typeof(TileGridBuilder))]
 public class TileGridUpdateManager : MonoBehaviour {
+	public ColorManager colorManager;
+
 	public bool fillEmptyTiles = true;
 
-	public TileDirection gravityDirection = TileDirection.Down;
+	public CardinalDirection gravityDirection = CardinalDirection.Down;
 
 	// Required Components:
 	TileGridManager tileGridManager;
@@ -33,30 +35,30 @@ public class TileGridUpdateManager : MonoBehaviour {
 	
 	}
 
-	public TileDirection GetRandomTileDirection() {
-		Array tileDirectionValues = Enum.GetValues(typeof(TileDirection));
-		return (TileDirection) tileDirectionValues.GetValue(Random.Range(0, tileDirectionValues.Length));
+	public CardinalDirection GetRandomTileDirection() {
+		Array tileDirectionValues = Enum.GetValues(typeof(CardinalDirection));
+		return (CardinalDirection) tileDirectionValues.GetValue(Random.Range(0, tileDirectionValues.Length));
 	}
 
 	public void UpdateTileGrid() {
 		UpdateTileGrid(gravityDirection);
 	}
 
-	void UpdateTileGrid(TileDirection direction) {
+	void UpdateTileGrid(CardinalDirection direction) {
 		switch (direction) {
-		case TileDirection.Up:
+		case CardinalDirection.Up:
 			UpdateTileGridUp();
 			break;
 			
-		case TileDirection.Down:
+		case CardinalDirection.Down:
 			UpdateTileGridDown();
 			break;
 			
-		case TileDirection.Left:
+		case CardinalDirection.Left:
 			UpdateTileGridLeft();
 			break;
 			
-		case TileDirection.Right:
+		case CardinalDirection.Right:
 			UpdateTileGridRight();
 			break;
 			
@@ -71,7 +73,7 @@ public class TileGridUpdateManager : MonoBehaviour {
 			for (int y = tileGridManager.numRows - 1; y >= 0; y--) {
 				Tile tile = tileGridManager.GetTileAt(x, y);
 				if (tile == null) {
-					if (!FillTileFromDirection(TileDirection.Down, x, y)) {
+					if (!FillTileFromDirection(CardinalDirection.Down, x, y)) {
 						break;
 					}
 				}
@@ -84,7 +86,7 @@ public class TileGridUpdateManager : MonoBehaviour {
 				for (int y = tileGridManager.numRows - 1; y >= 0; y--) {
 					Tile tile = tileGridManager.GetTileAt(x, y);
 					if (tile == null) {
-						CreateTileInDirection(TileDirection.Down, x, y);
+						CreateTileInDirection(CardinalDirection.Down, x, y);
 					}
 				}
 			}
@@ -97,7 +99,7 @@ public class TileGridUpdateManager : MonoBehaviour {
 			for (int y = 0; y < tileGridManager.numRows; y++) {
 				Tile tile = tileGridManager.GetTileAt(x, y);
 				if (tile == null) {
-					if (!FillTileFromDirection(TileDirection.Up, x, y)) {
+					if (!FillTileFromDirection(CardinalDirection.Up, x, y)) {
 						break;
 					}
 				}
@@ -110,7 +112,7 @@ public class TileGridUpdateManager : MonoBehaviour {
 				for (int y = 0; y < tileGridManager.numRows; y++) {
 					Tile tile = tileGridManager.GetTileAt(x, y);
 					if (tile == null) {
-						CreateTileInDirection(TileDirection.Up, x, y);
+						CreateTileInDirection(CardinalDirection.Up, x, y);
 					}
 				}
 			}
@@ -123,7 +125,7 @@ public class TileGridUpdateManager : MonoBehaviour {
 			for (int x = 0; x < tileGridManager.numColumns; x++) {
 				Tile tile = tileGridManager.GetTileAt(x, y);
 				if (tile == null) {
-					if (!FillTileFromDirection(TileDirection.Right, x, y)) {
+					if (!FillTileFromDirection(CardinalDirection.Right, x, y)) {
 						break;
 					}
 				}
@@ -136,7 +138,7 @@ public class TileGridUpdateManager : MonoBehaviour {
 				for (int x = 0; x < tileGridManager.numColumns; x++) {
 					Tile tile = tileGridManager.GetTileAt(x, y);
 					if (tile == null) {
-						CreateTileInDirection(TileDirection.Right, x, y);
+						CreateTileInDirection(CardinalDirection.Right, x, y);
 					}
 				}
 			}
@@ -149,7 +151,7 @@ public class TileGridUpdateManager : MonoBehaviour {
 			for (int x = tileGridManager.numColumns - 1; x >= 0; x--) {
 				Tile tile = tileGridManager.GetTileAt(x, y);
 				if (tile == null) {
-					if (!FillTileFromDirection(TileDirection.Left, x, y)) {
+					if (!FillTileFromDirection(CardinalDirection.Left, x, y)) {
 						break;
 					}
 				}
@@ -162,14 +164,14 @@ public class TileGridUpdateManager : MonoBehaviour {
 				for (int x = tileGridManager.numColumns - 1; x >= 0; x--) {
 					Tile tile = tileGridManager.GetTileAt(x, y);
 					if (tile == null) {
-						CreateTileInDirection(TileDirection.Left, x, y);
+						CreateTileInDirection(CardinalDirection.Left, x, y);
 					}
 				}
 			}
 		}
 	}
 	
-	bool FillTileFromDirection(TileDirection direction, int x, int y) {
+	bool FillTileFromDirection(CardinalDirection direction, int x, int y) {
 		Tile nextTile = GetNextTileInDirection(direction, x, y);
 		if (nextTile != null) {
 			int nextTileX = (int) nextTile.TilePosition.x;
@@ -186,26 +188,26 @@ public class TileGridUpdateManager : MonoBehaviour {
 		return false;
 	}
 	
-	void CreateTileInDirection(TileDirection direction, int x, int y) {
+	void CreateTileInDirection(CardinalDirection direction, int x, int y) {
 		Vector3 position = tileGridBuilder.GetTileWorldPosition(x, y, 
 		                                                        tileGridManager.tileWidth, tileGridManager.tileHeight, 
 		                                                        tileGridManager.rowPadding, tileGridManager.columnPadding, 
 		                                                        transform.position);
 		
 		switch (direction) {
-		case TileDirection.Up:
+		case CardinalDirection.Up:
 			position.y += tileGridManager.GridHeight / Globals.Instance.pixelsToUnits;
 			break;
 			
-		case TileDirection.Down:
+		case CardinalDirection.Down:
 			position.y -= tileGridManager.GridHeight / Globals.Instance.pixelsToUnits;
 			break;
 			
-		case TileDirection.Left:
+		case CardinalDirection.Left:
 			position.x -= tileGridManager.GridWidth / Globals.Instance.pixelsToUnits;
 			break;
 			
-		case TileDirection.Right:
+		case CardinalDirection.Right:
 			position.x += tileGridManager.GridWidth / Globals.Instance.pixelsToUnits;
 			break;
 			
@@ -216,7 +218,7 @@ public class TileGridUpdateManager : MonoBehaviour {
 		Tile tile = tileGridBuilder.BuildTile(tileGridManager.tilePrefab, 
 		                                      tileGridManager.tileWidth, tileGridManager.tileHeight, 
 		                                      position);
-		tileGridManager.RandomizeTileColor(tile);
+		tile.Color = colorManager.RandomColor();
 
 		tileGridManager.SetTileAt(x, y, tile);
 
@@ -224,18 +226,18 @@ public class TileGridUpdateManager : MonoBehaviour {
 		tileAnimationManager.MoveTile(tile, targetPosition, 10.0f, iTween.EaseType.easeInCirc);
 	}
 	
-	Tile GetNextTileInDirection(TileDirection direction, int x, int y) {
+	Tile GetNextTileInDirection(CardinalDirection direction, int x, int y) {
 		switch (direction) {
-		case TileDirection.Up:
+		case CardinalDirection.Up:
 			return GetNextTileUp(x, y);
 			
-		case TileDirection.Down:
+		case CardinalDirection.Down:
 			return GetNextTileDown(x, y);
 			
-		case TileDirection.Left:
+		case CardinalDirection.Left:
 			return GetNextTileLeft(x, y);
 			
-		case TileDirection.Right:
+		case CardinalDirection.Right:
 			return GetNextTileRight(x, y);
 			
 		default:

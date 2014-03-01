@@ -11,6 +11,16 @@ public class TileGroup : MonoBehaviour {
 		}
 	}
 
+	public Color Color {
+		get {
+			if (tiles.Count != 0) {
+				return tiles[0].Color;
+			} else {
+				return Color.white;
+			}
+		}
+	}
+
 	// Use this for initialization
 	void Start() {
 

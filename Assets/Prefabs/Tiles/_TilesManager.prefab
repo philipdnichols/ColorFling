@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  colorManager: {fileID: 0}
   numRows: 10
   numColumns: 10
   tileWidth: 32
@@ -51,13 +52,6 @@ MonoBehaviour:
   rowPadding: 2
   columnPadding: 2
   tilePrefab: {fileID: 100000, guid: 96e45fce892993b48bb7f12b01940cf3, type: 2}
-  tileColors:
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: .996078432, g: .643137276, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
-  - {r: .989010811, g: 0, b: 1, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d579789bb28a28f44bf79f15056ca2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorManager: {fileID: 0}
   fillEmptyTiles: 1
   gravityDirection: 1
 --- !u!1001 &100100000

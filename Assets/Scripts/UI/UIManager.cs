@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void GravityChanged() {
-		tileGridUpdateManager.gravityDirection = (TileDirection) Enum.Parse(typeof(TileDirection), UIPopupList.current.value);
+		tileGridUpdateManager.gravityDirection = (CardinalDirection) Enum.Parse(typeof(CardinalDirection), UIPopupList.current.value);
 	}
 
 	public void FillEmptyTilesChanged() {

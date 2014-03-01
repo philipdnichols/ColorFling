@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	public TileGridManager tileGridManager;
+	public BucketsManager bucketsManager;
 
 	bool isPaused = false;
 
