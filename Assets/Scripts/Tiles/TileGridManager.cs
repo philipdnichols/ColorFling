@@ -7,6 +7,8 @@ using System.Collections.Generic;
 [RequireComponent(typeof(TileAnimationManager))]
 [RequireComponent(typeof(TileGridUpdateManager))]
 public class TileGridManager : MonoBehaviour {
+	public GameManager gameManager;
+
 	public int numRows = 24;
 	public int numColumns = 12;
 
@@ -43,7 +45,7 @@ public class TileGridManager : MonoBehaviour {
 	// TODO better way to keep track of whether or not to allow input
 	public bool AllowFlings {
 		get {
-			return !tileAnimationManager.AnimationsRunning;
+			return !tileAnimationManager.AnimationsRunning && !gameManager.IsPaused;
 		}
 	}
 

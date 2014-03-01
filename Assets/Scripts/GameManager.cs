@@ -4,6 +4,14 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 	public TileGridManager tileGridManager;
 
+	bool isPaused = false;
+
+	public bool IsPaused {
+		get {
+			return isPaused;
+		}
+	}
+
 	// Use this for initialization
 	void Start() {
 	
@@ -16,5 +24,25 @@ public class GameManager : MonoBehaviour {
 
 	public void Restart() {
 		tileGridManager.InitializeGrid();
+	}
+
+	public void TogglePause() {
+		if (isPaused) {
+			Time.timeScale = 1.0f;
+			isPaused = false;
+		} else {
+			Time.timeScale = 0.0f;
+			isPaused = true;
+		}
+	}
+
+	public void Pause() {
+		Time.timeScale = 0.0f;
+		isPaused = true;
+	}
+
+	public void Unpause() {
+		Time.timeScale = 1.0f;
+		isPaused = false;
 	}
 }

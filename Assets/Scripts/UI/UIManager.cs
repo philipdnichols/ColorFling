@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour {
 	public TileGridUpdateManager tileGridUpdateManager;
 	public TileGridManager tileGridManager;
 
+	public UISprite modalBackground;
+
 	bool tileGridManagerUpdates = false;
 
 	int numRowsToUpdate;
@@ -82,5 +84,22 @@ public class UIManager : MonoBehaviour {
 
 			gameManager.Restart();
 		}
+	}
+
+	public void TogglePause() {
+		gameManager.TogglePause();
+		if (gameManager.IsPaused) {
+			ShowModalBackground();
+		} else {
+			HideModalBackground();
+		}
+	}
+
+	public void ShowModalBackground() {
+		modalBackground.gameObject.SetActive(true);
+	}
+
+	public void HideModalBackground() {
+		modalBackground.gameObject.SetActive(false);
 	}
 }

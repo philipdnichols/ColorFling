@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61e2cbfd7e867348b25090b5c60d1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   numRows: 10
   numColumns: 10
   tileWidth: 32
