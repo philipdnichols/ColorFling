@@ -1,6 +1,7 @@
 /Temp
 /obj
 /library
+/Assets/NGUI
 *.csproj
 *.unityproj
 *.sln
