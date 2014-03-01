@@ -25,6 +25,7 @@ ProjectName/*.userprefs
 /obj
 /library
 /Assets/NGUI
+/Assets/NGUI.meta
 *.csproj
 *.unityproj
 *.sln
