@@ -38,24 +38,30 @@ public class BucketsManager : MonoBehaviour {
 	}
 
 	public void InitializeBuckets() {
+		Color[] uniqueColors = colorManager.UniqueColors(4);
+
 		Bucket bucketUp = bucketBuilder.BuildBucket(bucketPrefab, 
 		                                            bucketSize, overhang, 
-		                                            CardinalDirection.Up, colorManager.RandomColor());
+		                                            CardinalDirection.Up, uniqueColors[0]);
+		bucketUp.transform.parent = transform;
 		buckets.Add(CardinalDirection.Up, bucketUp);
 
 		Bucket bucketDown = bucketBuilder.BuildBucket(bucketPrefab, 
 		                                              bucketSize, overhang, 
-		                                              CardinalDirection.Down, colorManager.RandomColor());
+		                                              CardinalDirection.Down, uniqueColors[1]);
+		bucketDown.transform.parent = transform;
 		buckets.Add(CardinalDirection.Down, bucketDown);
 
 		Bucket bucketLeft = bucketBuilder.BuildBucket(bucketPrefab, 
 		                                              bucketSize, overhang, 
-		                                              CardinalDirection.Left, colorManager.RandomColor());
+		                                              CardinalDirection.Left, uniqueColors[2]);
+		bucketLeft.transform.parent = transform;
 		buckets.Add(CardinalDirection.Left, bucketLeft);
 
 		Bucket bucketRight = bucketBuilder.BuildBucket(bucketPrefab, 
 		                                               bucketSize, overhang, 
-		                                               CardinalDirection.Right, colorManager.RandomColor());
+		                                               CardinalDirection.Right, uniqueColors[3]);
+		bucketRight.transform.parent = transform;
 		buckets.Add(CardinalDirection.Right, bucketRight);
 	}
 }

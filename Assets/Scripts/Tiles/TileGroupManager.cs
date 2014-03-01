@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class TileGroupManager : MonoBehaviour {
 	public GameObject tileGroupPrefab;
 
+	public float timeAfterScoredToDestroy = 1.0f;
+
 	// Required Components:
 	TileGridManager tileGridManager;
 
@@ -33,6 +35,7 @@ public class TileGroupManager : MonoBehaviour {
 					tileGroupGO.transform.parent = transform;
 					
 					TileGroup tileGroup = tileGroupGO.GetComponent<TileGroup>();
+					tileGroup.TimeAfterScoredToDestroy = timeAfterScoredToDestroy;
 					
 					BuildTileGroup(tile, tileGroup);
 				}

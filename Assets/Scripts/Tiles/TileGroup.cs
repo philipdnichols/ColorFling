@@ -5,6 +5,10 @@ using System.Collections.Generic;
 public class TileGroup : MonoBehaviour {
 	List<Tile> tiles = new List<Tile>();
 
+	bool isScored = false;
+
+	float timeAfterScoredToDestroy = 1.0f;
+
 	public List<Tile> Tiles {
 		get {
 			return tiles;
@@ -18,6 +22,26 @@ public class TileGroup : MonoBehaviour {
 			} else {
 				return Color.white;
 			}
+		}
+	}
+
+	public bool IsScored {
+		get {
+			return isScored;
+		}
+
+		set {
+			isScored = value;
+		}
+	}
+
+	public float TimeAfterScoredToDestroy {
+		get {
+			return timeAfterScoredToDestroy;
+		}
+
+		set {
+			timeAfterScoredToDestroy = value;
 		}
 	}
 
@@ -78,5 +102,23 @@ public class TileGroup : MonoBehaviour {
 		foreach (Tile tile in tiles) {
 			tile.transform.parent = transform;
 		}
+	}
+
+	public void Scored() {
+		isScored = true;
+
+		StartCoroutine("DestroyAfter", timeAfterScoredToDestroy);
+	}
+
+	public void NoScored() {
+		isScored = true;
+
+		StartCoroutine("DestroyAfter", timeAfterScoredToDestroy);
+	}
+
+	IEnumerator DestroyAfter(float t) {
+		yield return new WaitForSeconds(t);
+
+		Destroy(gameObject);
 	}
 }

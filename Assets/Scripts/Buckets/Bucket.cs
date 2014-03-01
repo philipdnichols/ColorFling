@@ -40,10 +40,16 @@ public class Bucket : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.tag == Globals.Tags.TILE) {
 			Tile tile = collider.GetComponent<Tile>();
-			if (tile.Color == color) {
-				Debug.Log("Score!!!");
-			} else {
-				Debug.Log("Awwwww...no score...");
+			if (!tile.TileGroup.IsScored) {
+				if (tile.TileGroup.Color == color) {
+					Debug.Log("Score!!!");
+
+					tile.TileGroup.Scored();
+				} else {
+					Debug.Log("Awwwww...no score...");
+
+					tile.TileGroup.NoScored();
+				}
 			}
 		}
 	}

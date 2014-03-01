@@ -40,11 +40,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileColors:
   - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0, b: 1, a: 1}
+  - {r: 1, g: .660079062, b: 0, a: 1}
+  - {r: .544117689, g: 0, b: .544117689, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
-  - {r: 1, g: .661764741, b: 0, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
