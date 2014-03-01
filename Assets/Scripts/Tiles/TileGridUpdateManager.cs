@@ -1,0 +1,289 @@
+﻿using UnityEngine;
+using System;
+using System.Collections;
+
+using Random = UnityEngine.Random;
+
+[RequireComponent(typeof(TileGridManager))]
+[RequireComponent(typeof(TileAnimationManager))]
+[RequireComponent(typeof(TileGridBuilder))]
+public class TileGridUpdateManager : MonoBehaviour {
+	public bool fillEmptyTiles = true;
+
+	public TileDirection gravityDirection = TileDirection.Down;
+
+	// Required Components:
+	TileGridManager tileGridManager;
+	TileAnimationManager tileAnimationManager;
+	TileGridBuilder tileGridBuilder;
+
+	// Use this for initialization
+	void Start() {
+	
+	}
+
+	void Awake() {
+		tileGridManager = GetComponent<TileGridManager>();
+		tileAnimationManager = GetComponent<TileAnimationManager>();
+		tileGridBuilder = GetComponent<TileGridBuilder>();
+	}
+	
+	// Update is called once per frame
+	void Update() {
+	
+	}
+
+	public TileDirection GetRandomTileDirection() {
+		Array tileDirectionValues = Enum.GetValues(typeof(TileDirection));
+		return (TileDirection) tileDirectionValues.GetValue(Random.Range(0, tileDirectionValues.Length));
+	}
+
+	public void UpdateTileGrid() {
+		UpdateTileGrid(gravityDirection);
+	}
+
+	void UpdateTileGrid(TileDirection direction) {
+		switch (direction) {
+		case TileDirection.Up:
+			UpdateTileGridUp();
+			break;
+			
+		case TileDirection.Down:
+			UpdateTileGridDown();
+			break;
+			
+		case TileDirection.Left:
+			UpdateTileGridLeft();
+			break;
+			
+		case TileDirection.Right:
+			UpdateTileGridRight();
+			break;
+			
+		default:
+			break;
+		}
+	}
+	
+	void UpdateTileGridUp() {
+		// Move existing tiles:
+		for (int x = 0; x < tileGridManager.numColumns; x++) {
+			for (int y = tileGridManager.numRows - 1; y >= 0; y--) {
+				Tile tile = tileGridManager.GetTileAt(x, y);
+				if (tile == null) {
+					if (!FillTileFromDirection(TileDirection.Down, x, y)) {
+						break;
+					}
+				}
+			}
+		}
+		
+		// Create new tiles for empty spots:
+		if (fillEmptyTiles) {
+			for (int x = 0; x < tileGridManager.numColumns; x++) {
+				for (int y = tileGridManager.numRows - 1; y >= 0; y--) {
+					Tile tile = tileGridManager.GetTileAt(x, y);
+					if (tile == null) {
+						CreateTileInDirection(TileDirection.Down, x, y);
+					}
+				}
+			}
+		}
+	}
+	
+	void UpdateTileGridDown() {
+		// Move existing tiles:
+		for (int x = 0; x < tileGridManager.numColumns; x++) {
+			for (int y = 0; y < tileGridManager.numRows; y++) {
+				Tile tile = tileGridManager.GetTileAt(x, y);
+				if (tile == null) {
+					if (!FillTileFromDirection(TileDirection.Up, x, y)) {
+						break;
+					}
+				}
+			}
+		}
+		
+		// Create new tiles for empty spots:
+		if (fillEmptyTiles) {
+			for (int x = 0; x < tileGridManager.numColumns; x++) {
+				for (int y = 0; y < tileGridManager.numRows; y++) {
+					Tile tile = tileGridManager.GetTileAt(x, y);
+					if (tile == null) {
+						CreateTileInDirection(TileDirection.Up, x, y);
+					}
+				}
+			}
+		}
+	}
+	
+	void UpdateTileGridLeft() {
+		// Move existing tiles:
+		for (int y = 0; y < tileGridManager.numRows; y++) {
+			for (int x = 0; x < tileGridManager.numColumns; x++) {
+				Tile tile = tileGridManager.GetTileAt(x, y);
+				if (tile == null) {
+					if (!FillTileFromDirection(TileDirection.Right, x, y)) {
+						break;
+					}
+				}
+			}
+		}
+		
+		// Create new tiles for empty spots:
+		if (fillEmptyTiles) {
+			for (int y = 0; y < tileGridManager.numRows; y++) {
+				for (int x = 0; x < tileGridManager.numColumns; x++) {
+					Tile tile = tileGridManager.GetTileAt(x, y);
+					if (tile == null) {
+						CreateTileInDirection(TileDirection.Right, x, y);
+					}
+				}
+			}
+		}
+	}
+	
+	void UpdateTileGridRight() {
+		// Move existing tiles:
+		for (int y = 0; y < tileGridManager.numRows; y++) {
+			for (int x = tileGridManager.numColumns - 1; x >= 0; x--) {
+				Tile tile = tileGridManager.GetTileAt(x, y);
+				if (tile == null) {
+					if (!FillTileFromDirection(TileDirection.Left, x, y)) {
+						break;
+					}
+				}
+			}
+		}
+		
+		// Create new tiles for empty spots:
+		if (fillEmptyTiles) {
+			for (int y = 0; y < tileGridManager.numRows; y++) {
+				for (int x = tileGridManager.numColumns - 1; x >= 0; x--) {
+					Tile tile = tileGridManager.GetTileAt(x, y);
+					if (tile == null) {
+						CreateTileInDirection(TileDirection.Left, x, y);
+					}
+				}
+			}
+		}
+	}
+	
+	bool FillTileFromDirection(TileDirection direction, int x, int y) {
+		Tile nextTile = GetNextTileInDirection(direction, x, y);
+		if (nextTile != null) {
+			int nextTileX = (int) nextTile.TilePosition.x;
+			int nextTileY = (int) nextTile.TilePosition.y;
+			tileGridManager.ClearTile(nextTileX, nextTileY);
+			tileGridManager.SetTileAt(x, y, nextTile);
+
+			Vector3 targetPosition = tileGridManager.GetTileWorldPosition(x, y);
+			tileAnimationManager.MoveTile(nextTile, targetPosition, 5.0f, iTween.EaseType.easeInCirc);
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	void CreateTileInDirection(TileDirection direction, int x, int y) {
+		Vector3 position = tileGridBuilder.GetTileWorldPosition(x, y, 
+		                                                        tileGridManager.tileWidth, tileGridManager.tileHeight, 
+		                                                        tileGridManager.rowPadding, tileGridManager.columnPadding, 
+		                                                        transform.position);
+		
+		switch (direction) {
+		case TileDirection.Up:
+			position.y += tileGridManager.GridHeight / Globals.Instance.pixelsToUnits;
+			break;
+			
+		case TileDirection.Down:
+			position.y -= tileGridManager.GridHeight / Globals.Instance.pixelsToUnits;
+			break;
+			
+		case TileDirection.Left:
+			position.x -= tileGridManager.GridWidth / Globals.Instance.pixelsToUnits;
+			break;
+			
+		case TileDirection.Right:
+			position.x += tileGridManager.GridWidth / Globals.Instance.pixelsToUnits;
+			break;
+			
+		default:
+			break;
+		}
+		
+		Tile tile = tileGridBuilder.BuildTile(tileGridManager.tilePrefab, 
+		                                      tileGridManager.tileWidth, tileGridManager.tileHeight, 
+		                                      position);
+		tileGridManager.RandomizeTileColor(tile);
+
+		tileGridManager.SetTileAt(x, y, tile);
+
+		Vector3 targetPosition = tileGridManager.GetTileWorldPosition(x, y);
+		tileAnimationManager.MoveTile(tile, targetPosition, 10.0f, iTween.EaseType.easeInCirc);
+	}
+	
+	Tile GetNextTileInDirection(TileDirection direction, int x, int y) {
+		switch (direction) {
+		case TileDirection.Up:
+			return GetNextTileUp(x, y);
+			
+		case TileDirection.Down:
+			return GetNextTileDown(x, y);
+			
+		case TileDirection.Left:
+			return GetNextTileLeft(x, y);
+			
+		case TileDirection.Right:
+			return GetNextTileRight(x, y);
+			
+		default:
+			return null;
+		}
+	}
+	
+	Tile GetNextTileUp(int x, int y) {
+		y++;
+		for (; y < tileGridManager.numRows; y++) {
+			Tile tile = tileGridManager.GetTileAt(x, y);
+			if (tile != null) {
+				return tile;
+			}
+		}
+		return null;
+	}
+	
+	Tile GetNextTileDown(int x, int y) {
+		y--;
+		for (; y >= 0; y--) {
+			Tile tile = tileGridManager.GetTileAt(x, y);
+			if (tile != null) {
+				return tile;
+			}
+		}
+		return null;
+	}
+	
+	Tile GetNextTileLeft(int x, int y) {
+		x--;
+		for (; x >= 0; x--) {
+			Tile tile = tileGridManager.GetTileAt(x, y);
+			if (tile != null) {
+				return tile;
+			}
+		}
+		return null;
+	}
+	
+	Tile GetNextTileRight(int x, int y) {
+		x++;
+		for (; x < tileGridManager.numColumns; x++) {
+			Tile tile = tileGridManager.GetTileAt(x, y);
+			if (tile != null) {
+				return tile;
+			}
+		}
+		return null;
+	}
+}
