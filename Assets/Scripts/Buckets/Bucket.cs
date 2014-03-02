@@ -6,8 +6,9 @@ public class Bucket : MonoBehaviour {
 
 	Color color;
 
-	SpriteRenderer spriteRenderer;
-	GameObject spriteRendererGO;
+	BucketGFX bucketGFX;
+	BucketFadeGFX bucketFadeGFX;
+	BucketTrigger bucketTrigger;
 
 	BoxCollider2D boxCollider2D;
 
@@ -32,20 +33,28 @@ public class Bucket : MonoBehaviour {
 		}
 
 		set {
-			spriteRenderer.color = value;
+			bucketGFX.Color = value;
+			bucketFadeGFX.Color = Color.Lerp(value, Color.white, 0.5f);
+
 			color = value;
 		}
 	}
 
-	public SpriteRenderer SpriteRenderer {
+	public BucketGFX BucketGFX {
 		get {
-			return SpriteRenderer;
+			return bucketGFX;
 		}
 	}
 
-	public GameObject SpriteRendererGO {
+	public BucketFadeGFX BucketFadeGFX {
 		get {
-			return spriteRendererGO;
+			return bucketFadeGFX;
+		}
+	}
+
+	public BucketTrigger BucketTrigger {
+		get {
+			return bucketTrigger;
 		}
 	}
 
@@ -61,8 +70,9 @@ public class Bucket : MonoBehaviour {
 	}
 
 	void Awake() {
-		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		spriteRendererGO = spriteRenderer.gameObject;
+		bucketGFX = GetComponentInChildren<BucketGFX>();
+		bucketFadeGFX = GetComponentInChildren<BucketFadeGFX>();
+		bucketTrigger = GetComponentInChildren<BucketTrigger>();
 
 		boxCollider2D = ((BoxCollider2D) collider2D);
 	}
@@ -72,49 +82,49 @@ public class Bucket : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter2D(Collider2D collider) {
+	public void HandleTrigger(Collider2D collider) {
 		if (collider.tag == Globals.Tags.TILE) {
 			Tile tile = collider.GetComponent<Tile>();
 			if (!tile.TileGroup.IsScored) {
 				if (tile.TileGroup.Color == color) {
 					Debug.Log("Score!!!");
-
+					
 					currentFullness += tile.TileGroup.Tiles.Count;
 					if (currentFullness > maximumSize) {
 						currentFullness = maximumSize;
 					}
-
+					
 					// Clean all this up, these calculations could be stored?
-					Vector3 scale = spriteRendererGO.transform.localScale;
+					Vector3 scale = bucketGFX.gameObject.transform.localScale;
 					switch (direction) {
 					case CardinalDirection.Up:
 						scale.x = ((float) currentFullness / maximumSize) * (Globals.WORLD_WIDTH * Globals.Instance.pixelsToUnits);
 						break;
-
+						
 					case CardinalDirection.Down:
 						scale.x = ((float) currentFullness / maximumSize) * (Globals.WORLD_WIDTH * Globals.Instance.pixelsToUnits);
 						break;
-
+						
 					case CardinalDirection.Left:
 						scale.y = ((float) currentFullness / maximumSize) * (Globals.WORLD_HEIGHT * Globals.Instance.pixelsToUnits);
 						break;
-
+						
 					case CardinalDirection.Right:
 						scale.y = ((float) currentFullness / maximumSize) * (Globals.WORLD_HEIGHT * Globals.Instance.pixelsToUnits);
 						break;
-
+						
 					default:
 						break;
 					}
-
-					spriteRendererGO.transform.localScale = scale;
-
+					
+					bucketGFX.gameObject.transform.localScale = scale;
+					
 					tile.TileGroup.Scored();
-				} else {
-					Debug.Log("Awwwww...no score...");
-
-					tile.TileGroup.NoScored();
-				}
+				} //else {
+//					Debug.Log("Awwwww...no score...");
+//					
+//					tile.TileGroup.NoScored();
+//				}
 			}
 		}
 	}

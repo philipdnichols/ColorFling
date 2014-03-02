@@ -115,6 +115,12 @@ public class TileGridManager : MonoBehaviour {
 		tiles[y, x] = null;
 	}
 
+	public void ClearTiles(List<Tile> tiles) {
+		foreach (Tile tile in tiles) {
+			ClearTile((int) tile.TilePosition.x, (int) tile.TilePosition.y);
+		}
+	}
+
 	public Vector3 GetTileWorldPosition(int x, int y) {
 		return tileGridBuilder.GetTileWorldPosition(x, y, 
 		                                            tileWidth, tileHeight, 

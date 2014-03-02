@@ -8,6 +8,8 @@ public class TileGroupManager : MonoBehaviour {
 
 	public float timeAfterScoredToDestroy = 1.0f;
 
+	public BucketsManager bucketsManager;
+
 	// Required Components:
 	TileGridManager tileGridManager;
 
@@ -36,6 +38,8 @@ public class TileGroupManager : MonoBehaviour {
 					
 					TileGroup tileGroup = tileGroupGO.GetComponent<TileGroup>();
 					tileGroup.TimeAfterScoredToDestroy = timeAfterScoredToDestroy;
+					tileGroup.IsAttachedToGrid = true;
+					tileGroup.SetLayer(Globals.Instance.BucketLayersToTileLayers[bucketsManager.ColorToLayer[tile.Color]]);
 					
 					BuildTileGroup(tile, tileGroup);
 				}
@@ -78,14 +82,6 @@ public class TileGroupManager : MonoBehaviour {
 		foreach (TileGroup tileGroup in tileGroups) {
 			tileGroup.DestroyAllTiles();
 			Destroy(tileGroup.gameObject);
-		}
-	}
-
-	public void ClearAllTileGroupTiles(TileGroup tileGroup) {
-		foreach (Tile childTile in tileGroup.Tiles) {
-			int x = (int) childTile.TilePosition.x;
-			int y = (int) childTile.TilePosition.y;
-			tileGridManager.ClearTile(x, y);
 		}
 	}
 }

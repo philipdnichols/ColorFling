@@ -9,6 +9,8 @@ public class TileGroup : MonoBehaviour {
 
 	float timeAfterScoredToDestroy = 1.0f;
 
+	bool isAttachedToGrid = false;
+
 	public List<Tile> Tiles {
 		get {
 			return tiles;
@@ -45,6 +47,16 @@ public class TileGroup : MonoBehaviour {
 		}
 	}
 
+	public bool IsAttachedToGrid {
+		get {
+			return isAttachedToGrid;
+		}
+
+		set {
+			isAttachedToGrid = value;
+		}
+	}
+
 	// Use this for initialization
 	void Start() {
 
@@ -58,6 +70,7 @@ public class TileGroup : MonoBehaviour {
 	public void AddTile(Tile tile) {
 		tile.TileGroup = this;
 		tile.transform.parent = transform;
+		tile.gameObject.layer = gameObject.layer;
 		tiles.Add(tile);
 	}
 
@@ -101,6 +114,16 @@ public class TileGroup : MonoBehaviour {
 
 		foreach (Tile tile in tiles) {
 			tile.transform.parent = transform;
+		}
+	}
+
+	public void SetLayer(string layer) {
+		int layerInt = LayerMask.NameToLayer(layer);
+
+		gameObject.layer = layerInt;
+
+		foreach (Tile tile in tiles) {
+			tile.gameObject.layer = layerInt;
 		}
 	}
 

@@ -4,6 +4,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 	public TileGridManager tileGridManager;
 	public BucketsManager bucketsManager;
+	public ScoreManager scoreManager;
 
 	bool isPaused = false;
 

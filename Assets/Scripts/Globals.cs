@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Globals : Singleton<Globals> {
 	protected Globals() {}
@@ -14,12 +15,25 @@ public class Globals : Singleton<Globals> {
 
 	public int pixelsToUnits = 100;
 
+	Dictionary<string, string> bucketLayersToTileLayers = new Dictionary<string, string>();
+
 	Camera mainCamera;
+
+	public Dictionary<string, string> BucketLayersToTileLayers {
+		get {
+			return bucketLayersToTileLayers;
+		}
+	}
 
 	void Start() {
 		mainCamera = Camera.main;
 
 		UpdateWorldVariables();
+
+		bucketLayersToTileLayers.Add(Layers.BUCKET1, Layers.TILE1);
+		bucketLayersToTileLayers.Add(Layers.BUCKET2, Layers.TILE2);
+		bucketLayersToTileLayers.Add(Layers.BUCKET3, Layers.TILE3);
+		bucketLayersToTileLayers.Add(Layers.BUCKET4, Layers.TILE4);
 	}
 	
 	// (optional) allow runtime registration of global objects
@@ -59,6 +73,15 @@ public class Globals : Singleton<Globals> {
 	}
 
 	public static class Layers {
+		public static string BUCKET1 = 		"Bucket1";
+		public static string BUCKET2 = 		"Bucket2";
+		public static string BUCKET3 = 		"Bucket3";
+		public static string BUCKET4 = 		"Bucket4";
 
+		public static string TILE1 = 		"Tile1";
+		public static string TILE2 = 		"Tile2";
+		public static string TILE3 = 		"Tile3";
+		public static string TILE4 = 		"Tile4";
+		public static string TILE_NULL = 	"TileNull";
 	}
 }

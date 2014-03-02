@@ -9,9 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: _BucketsManager
+  m_Name: _InputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,22 +35,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 539cc33d1e4d6e249ae2f89f44fe1a2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bucketPrefab: {fileID: 100000, guid: fe7d9c6d4020b1c4390ce1d69cc6db23, type: 2}
-  colorManager: {fileID: 0}
-  bucketSize: 100
-  overhang: 20
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f585066d973abef43b17a79afaa66f94, type: 3}
+  m_Script: {fileID: 11500000, guid: d6450b82839ffbc4faa835457d5c64b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &100100000

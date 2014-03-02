@@ -2,13 +2,11 @@
 using System.Collections;
 
 [RequireComponent(typeof(TileGridManager))]
-[RequireComponent(typeof(TileGroupManager))]
 public class TileFlingManager : MonoBehaviour {
 	SpringJoint2D springJoint;
 
 	// Required Components
 	TileGridManager tileGridManager;
-	TileGroupManager tileGroupManager;
 
 	// Use this for initialization
 	void Start() {
@@ -17,7 +15,6 @@ public class TileFlingManager : MonoBehaviour {
 
 	void Awake() {
 		tileGridManager = GetComponent<TileGridManager>();
-		tileGroupManager = GetComponent<TileGroupManager>();
 	}
 	
 	// Update is called once per frame
@@ -39,9 +36,16 @@ public class TileFlingManager : MonoBehaviour {
 						// TODO move this somewhere else?
 						TileGroup tileGroup = hit.transform.GetComponent<TileGroup>();
 						tileGroup.MovePositionIndependentOfChildren(hit.point);
-						tileGroup.transform.parent = null;
 
-						tileGroupManager.ClearAllTileGroupTiles(tileGroup);
+						if (tileGroup.IsAttachedToGrid) {
+							tileGroup.IsAttachedToGrid = false;
+							tileGroup.transform.parent = null;
+
+							tileGridManager.ClearTiles(tileGroup.Tiles);
+
+							// TODO when do we trigger this?
+							tileGridManager.UpdateTileGridManager();
+						}
 						
 						springJoint.transform.position = hit.point;
 						springJoint.distance = 0.2f;
@@ -52,7 +56,7 @@ public class TileFlingManager : MonoBehaviour {
 						
 						BoxCollider2D[] childCollider2Ds = hit.transform.GetComponentsInChildren<BoxCollider2D>();
 						foreach (BoxCollider2D childCollider2D in childCollider2Ds) {
-							childCollider2D.isTrigger = true;
+							childCollider2D.isTrigger = false;
 						}
 						
 						SpriteRenderer[] childSpriteRenderers = hit.transform.GetComponentsInChildren<SpriteRenderer>();
@@ -61,9 +65,6 @@ public class TileFlingManager : MonoBehaviour {
 						}
 						
 						StartCoroutine("DragObject");
-
-						// TODO when do we trigger this?
-						tileGridManager.UpdateTileGridManager();
 					}
 				}
 			}
