@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bucket
   m_TagString: Bucket
   m_Icon: {fileID: 0}

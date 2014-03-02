@@ -12,10 +12,8 @@ public class Bucket : MonoBehaviour {
 
 	BoxCollider2D boxCollider2D;
 
-	// TODO move these
-	// How many tiles does it take to fill this thing?
 	int currentFullness = 0;
-	int maximumSize = 100;
+	int maximumSize;
 
 	public CardinalDirection Direction {
 		get {
@@ -64,6 +62,22 @@ public class Bucket : MonoBehaviour {
 		}
 	}
 
+	public int CurrentFullness {
+		get {
+			return currentFullness;
+		}
+	}
+
+	public int MaximumSize {
+		get {
+			return maximumSize;
+		}
+
+		set {
+			maximumSize = value;
+		}
+	}
+
 	// Use this for initialization
 	void Start() {
 	
@@ -80,6 +94,12 @@ public class Bucket : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 	
+	}
+
+	public void SetLayer(string layer) {
+		int layerInt = LayerMask.NameToLayer(layer);
+
+		gameObject.layer = layerInt;
 	}
 
 	public void HandleTrigger(Collider2D collider) {
@@ -120,6 +140,11 @@ public class Bucket : MonoBehaviour {
 					bucketGFX.gameObject.transform.localScale = scale;
 					
 					tile.TileGroup.Scored();
+
+					if (currentFullness == maximumSize) {
+						// TODO this is a dirty, dirty hack and I feel bad for doing it. What is a better way to be handling this?
+						transform.parent.GetComponent<BucketsManager>().HandleFullBucket(this);
+					}
 				} //else {
 //					Debug.Log("Awwwww...no score...");
 //					

@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: Tile
   m_TagString: Tile
   m_Icon: {fileID: 0}

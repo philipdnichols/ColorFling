@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   - 50: {fileID: 5000000}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: TileGroup
   m_TagString: TileGroup
   m_Icon: {fileID: 0}

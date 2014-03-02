@@ -11,6 +11,9 @@ public class BucketsManager : MonoBehaviour {
 	public int bucketSize = 100;
 	public int overhang = 5;
 
+	public int sizeMin = 10;
+	public int sizeMax = 20;
+
 	Dictionary<CardinalDirection, Bucket> buckets = new Dictionary<CardinalDirection, Bucket>();
 
 	Dictionary<Color, string> colorToLayer = new Dictionary<Color, string>();
@@ -50,42 +53,44 @@ public class BucketsManager : MonoBehaviour {
 
 		Color colorUp = uniqueColors[0];
 		string layerUp = Globals.Layers.BUCKET1;
-		Bucket bucketUp = bucketBuilder.BuildBucket(bucketPrefab, 
-		                                            bucketSize, overhang, 
-		                                            CardinalDirection.Up, colorUp);
-		bucketUp.transform.parent = transform;
-		bucketUp.gameObject.layer = LayerMask.NameToLayer(layerUp);
-		colorToLayer.Add(colorUp, layerUp);
-		buckets.Add(CardinalDirection.Up, bucketUp);
+		BuildBucket(colorUp, layerUp, CardinalDirection.Up);
 
 		Color colorDown = uniqueColors[1];
 		string layerDown = Globals.Layers.BUCKET2;
-		Bucket bucketDown = bucketBuilder.BuildBucket(bucketPrefab, 
-		                                              bucketSize, overhang, 
-		                                              CardinalDirection.Down, colorDown);
-		bucketDown.transform.parent = transform;
-		bucketDown.gameObject.layer = LayerMask.NameToLayer(layerDown);
-		colorToLayer.Add(colorDown, layerDown);
-		buckets.Add(CardinalDirection.Down, bucketDown);
+		BuildBucket(colorDown, layerDown, CardinalDirection.Down);
 
 		Color colorLeft = uniqueColors[2];
 		string layerLeft = Globals.Layers.BUCKET3;
-		Bucket bucketLeft = bucketBuilder.BuildBucket(bucketPrefab, 
-		                                              bucketSize, overhang, 
-		                                              CardinalDirection.Left, colorLeft);
-		bucketLeft.transform.parent = transform;
-		bucketLeft.gameObject.layer = LayerMask.NameToLayer(layerLeft);
-		colorToLayer.Add(colorLeft, layerLeft);
-		buckets.Add(CardinalDirection.Left, bucketLeft);
+		BuildBucket(colorLeft, layerLeft, CardinalDirection.Left);
 
 		Color colorRight = uniqueColors[3];
 		string layerRight = Globals.Layers.BUCKET4;
-		Bucket bucketRight = bucketBuilder.BuildBucket(bucketPrefab, 
-		                                               bucketSize, overhang, 
-		                                               CardinalDirection.Right, colorRight);
-		bucketRight.transform.parent = transform;
-		bucketRight.gameObject.layer = LayerMask.NameToLayer(layerRight);
-		colorToLayer.Add(colorRight, layerRight);
-		buckets.Add(CardinalDirection.Right, bucketRight);
+		BuildBucket(colorRight, layerRight, CardinalDirection.Right);
+	}
+
+	void BuildBucket(Color color, string layer, CardinalDirection direction) {
+		Bucket bucket = bucketBuilder.BuildBucket(bucketPrefab, 
+		                                          bucketSize, overhang, 
+		                                          direction, color);
+		bucket.transform.parent = transform;
+		bucket.SetLayer(layer);
+		bucket.MaximumSize = Random.Range(sizeMin, sizeMax);
+
+		colorToLayer.Add(color, layer);
+		buckets.Add(direction, bucket);
+	}
+
+	public void HandleFullBucket(Bucket bucket) {
+		string layer = colorToLayer[bucket.Color];
+		colorToLayer.Remove(bucket.Color);
+
+		buckets.Remove(bucket.Direction);
+
+		Destroy(bucket.gameObject);
+
+		HashSet<Color> usedColors = new HashSet<Color>(colorToLayer.Keys);
+
+		Color[] colors = colorManager.UniqueColors(1, usedColors);
+		BuildBucket(colors[0], layer, bucket.Direction);
 	}
 }

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileGroupPrefab: {fileID: 100000, guid: 537415e8b1c3e824d8c3ad98dc0c9238, type: 2}
   timeAfterScoredToDestroy: 1
+  bucketsManager: {fileID: 0}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

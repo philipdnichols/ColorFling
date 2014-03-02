@@ -39,7 +39,11 @@ public class TileGroupManager : MonoBehaviour {
 					TileGroup tileGroup = tileGroupGO.GetComponent<TileGroup>();
 					tileGroup.TimeAfterScoredToDestroy = timeAfterScoredToDestroy;
 					tileGroup.IsAttachedToGrid = true;
-					tileGroup.SetLayer(Globals.Instance.BucketLayersToTileLayers[bucketsManager.ColorToLayer[tile.Color]]);
+					if (bucketsManager.ColorToLayer.ContainsKey(tile.Color)) {
+						tileGroup.SetLayer(Globals.Instance.BucketLayersToTileLayers[bucketsManager.ColorToLayer[tile.Color]]);
+					} else {
+						tileGroup.SetLayer(Globals.Layers.TILE_NULL);
+					}
 					
 					BuildTileGroup(tile, tileGroup);
 				}

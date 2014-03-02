@@ -34,6 +34,7 @@ public class Globals : Singleton<Globals> {
 		bucketLayersToTileLayers.Add(Layers.BUCKET2, Layers.TILE2);
 		bucketLayersToTileLayers.Add(Layers.BUCKET3, Layers.TILE3);
 		bucketLayersToTileLayers.Add(Layers.BUCKET4, Layers.TILE4);
+		bucketLayersToTileLayers.Add(Layers.BUCKET_NULL, Layers.TILE_NULL);
 	}
 	
 	// (optional) allow runtime registration of global objects
@@ -77,6 +78,7 @@ public class Globals : Singleton<Globals> {
 		public static string BUCKET2 = 		"Bucket2";
 		public static string BUCKET3 = 		"Bucket3";
 		public static string BUCKET4 = 		"Bucket4";
+		public static string BUCKET_NULL = 	"BucketNull";
 
 		public static string TILE1 = 		"Tile1";
 		public static string TILE2 = 		"Tile2";
