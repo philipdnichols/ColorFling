@@ -18,45 +18,60 @@ public class BucketBuilder : MonoBehaviour {
 
 	public void UpdateBucketScaleAndPosition(Bucket bucket, int bucketSize, int overhang) {
 		Vector3 position = Vector3.zero;
-		Vector3 scale = Vector3.one;
+		Vector2 colliderSize = Vector2.one;
+		Vector3 spriteScale = bucket.SpriteRendererGO.transform.localScale;
 		switch (bucket.Direction) {
 		case CardinalDirection.Up:
 			position.x = Globals.WORLD_WIDTH / 2.0f;
 			position.y = Globals.WORLD_HEIGHT + ((bucketSize - overhang) / 2.0f / Globals.Instance.pixelsToUnits);
 
-			scale.x = Globals.WORLD_WIDTH * Globals.Instance.pixelsToUnits;
-			scale.y = bucketSize;
+			colliderSize.x = Globals.WORLD_WIDTH;
+			colliderSize.y = (float) bucketSize / Globals.Instance.pixelsToUnits;
+
+			//spriteScale.x = Globals.WORLD_WIDTH * Globals.Instance.pixelsToUnits;
+			spriteScale.y = bucketSize;
 			break;
 			
 		case CardinalDirection.Down:
 			position.x = Globals.WORLD_WIDTH / 2.0f;
 			position.y = -((bucketSize - overhang) / 2.0f / Globals.Instance.pixelsToUnits);
 
-			scale.x = Globals.WORLD_WIDTH * Globals.Instance.pixelsToUnits;
-			scale.y = bucketSize;
+			colliderSize.x = Globals.WORLD_WIDTH;
+			colliderSize.y = (float) bucketSize / Globals.Instance.pixelsToUnits;
+
+			//spriteScale.x = Globals.WORLD_WIDTH * Globals.Instance.pixelsToUnits;
+			spriteScale.y = bucketSize;
 			break;
 			
 		case CardinalDirection.Left:
 			position.x = -((bucketSize - overhang) / 2.0f / Globals.Instance.pixelsToUnits);
 			position.y = Globals.WORLD_HEIGHT / 2.0f;
 
-			scale.x = bucketSize;
-			scale.y = Globals.WORLD_HEIGHT * Globals.Instance.pixelsToUnits;
+			colliderSize.x = (float) bucketSize / Globals.Instance.pixelsToUnits;
+			colliderSize.y = Globals.WORLD_HEIGHT;
+
+			spriteScale.x = bucketSize;
+			//spriteScale.y = Globals.WORLD_HEIGHT * Globals.Instance.pixelsToUnits;
 			break;
 			
 		case CardinalDirection.Right:
 			position.x = Globals.WORLD_WIDTH + ((bucketSize - overhang) / 2.0f / Globals.Instance.pixelsToUnits);
 			position.y = Globals.WORLD_HEIGHT / 2.0f;
 
-			scale.x = bucketSize;
-			scale.y = Globals.WORLD_HEIGHT * Globals.Instance.pixelsToUnits;
+			colliderSize.x = (float) bucketSize / Globals.Instance.pixelsToUnits;
+			colliderSize.y = Globals.WORLD_HEIGHT;
+
+			spriteScale.x = bucketSize;
+			//spriteScale.y = Globals.WORLD_HEIGHT * Globals.Instance.pixelsToUnits;
 			break;
 			
 		default:
 			break;
 		}
 
-		bucket.gameObject.transform.localScale = scale;
+		// TODO this can be cleaed up? Not really necessary, not done a lot.
+		bucket.BoxCollider2D.size = colliderSize;
+		bucket.SpriteRendererGO.transform.localScale = spriteScale;
 		
 		bucket.gameObject.transform.position = position;
 	}
