@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(TileGridManager))]
 public class TileFlingManager : MonoBehaviour {
 	SpringJoint2D springJoint;
 
+	List<TileGroup> flungTileGroups = new List<TileGroup>();
+
 	// Required Components
 	TileGridManager tileGridManager;
+
+	public List<TileGroup> FlungTileGroups {
+		get {
+			return flungTileGroups;
+		}
+	}
 
 	// Use this for initialization
 	void Start() {
@@ -19,6 +28,8 @@ public class TileFlingManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
+		RemoveNullFlungTileGroups();
+
 		// TODO something something this should be encapsulated more
 		if (UICamera.hoveredObject == null) {
 			if (tileGridManager.AllowFlings) {
@@ -40,6 +51,8 @@ public class TileFlingManager : MonoBehaviour {
 						if (tileGroup.IsAttachedToGrid) {
 							tileGroup.IsAttachedToGrid = false;
 							tileGroup.transform.parent = null;
+
+							flungTileGroups.Add(tileGroup);
 
 							tileGridManager.ClearTiles(tileGroup.Tiles);
 
@@ -69,6 +82,17 @@ public class TileFlingManager : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void RemoveNullFlungTileGroups() {
+		List<TileGroup> newFlungTileGroups = new List<TileGroup>();
+		foreach (TileGroup flungTileGroup in flungTileGroups) {
+			if (flungTileGroup != null) {
+				newFlungTileGroups.Add(flungTileGroup);
+			}
+		}
+
+		flungTileGroups = newFlungTileGroups;
 	}
 
 	IEnumerator DragObject() {

@@ -107,8 +107,6 @@ public class Bucket : MonoBehaviour {
 			Tile tile = collider.GetComponent<Tile>();
 			if (!tile.TileGroup.IsScored) {
 				if (tile.TileGroup.Color == color) {
-					Debug.Log("Score!!!");
-					
 					currentFullness += tile.TileGroup.Tiles.Count;
 					if (currentFullness > maximumSize) {
 						currentFullness = maximumSize;
@@ -145,11 +143,7 @@ public class Bucket : MonoBehaviour {
 						// TODO this is a dirty, dirty hack and I feel bad for doing it. What is a better way to be handling this?
 						transform.parent.GetComponent<BucketsManager>().HandleFullBucket(this);
 					}
-				} //else {
-//					Debug.Log("Awwwww...no score...");
-//					
-//					tile.TileGroup.NoScored();
-//				}
+				}
 			}
 		}
 	}

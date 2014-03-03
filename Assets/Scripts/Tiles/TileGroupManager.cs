@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(TileGridManager))]
+[RequireComponent(typeof(TileFlingManager))]
 public class TileGroupManager : MonoBehaviour {
 	public GameObject tileGroupPrefab;
 
@@ -12,6 +13,7 @@ public class TileGroupManager : MonoBehaviour {
 
 	// Required Components:
 	TileGridManager tileGridManager;
+	TileFlingManager tileFlingManager;
 
 	// Use this for initialization
 	void Start() {
@@ -20,6 +22,7 @@ public class TileGroupManager : MonoBehaviour {
 
 	void Awake() {
 		tileGridManager = GetComponent<TileGridManager>();
+		tileFlingManager = GetComponent<TileFlingManager>();
 	}
 	
 	// Update is called once per frame
@@ -39,13 +42,10 @@ public class TileGroupManager : MonoBehaviour {
 					TileGroup tileGroup = tileGroupGO.GetComponent<TileGroup>();
 					tileGroup.TimeAfterScoredToDestroy = timeAfterScoredToDestroy;
 					tileGroup.IsAttachedToGrid = true;
-					if (bucketsManager.ColorToLayer.ContainsKey(tile.Color)) {
-						tileGroup.SetLayer(Globals.Instance.BucketLayersToTileLayers[bucketsManager.ColorToLayer[tile.Color]]);
-					} else {
-						tileGroup.SetLayer(Globals.Layers.TILE_NULL);
-					}
 					
 					BuildTileGroup(tile, tileGroup);
+
+					UpdateTileGroupLayer(tileGroup);
 				}
 			}
 		}
@@ -86,6 +86,28 @@ public class TileGroupManager : MonoBehaviour {
 		foreach (TileGroup tileGroup in tileGroups) {
 			tileGroup.DestroyAllTiles();
 			Destroy(tileGroup.gameObject);
+		}
+	}
+
+	public void UpdateTileGroupLayers() {
+		TileGroup[] tileGroups = GetComponentsInChildren<TileGroup>();
+
+		foreach (TileGroup tileGroup in tileGroups) {
+			UpdateTileGroupLayer(tileGroup);
+		}
+
+		foreach (TileGroup flungTileGroup in tileFlingManager.FlungTileGroups) {
+			UpdateTileGroupLayer(flungTileGroup);
+		}
+	}
+
+	public void UpdateTileGroupLayer(TileGroup tileGroup) {
+		if (!tileGroup.IsScored) {
+			if (bucketsManager.ColorToLayer.ContainsKey(tileGroup.Color)) {
+				tileGroup.SetLayer(Globals.Instance.BucketLayersToTileLayers[bucketsManager.ColorToLayer[tileGroup.Color]]);
+			} else {
+				tileGroup.SetLayer(Globals.Layers.TILE_NULL);
+			}
 		}
 	}
 }

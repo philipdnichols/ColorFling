@@ -7,6 +7,7 @@ public class BucketsManager : MonoBehaviour {
 	public GameObject bucketPrefab;
 
 	public ColorManager colorManager;
+	public TileGroupManager tileGroupManager;
 
 	public int bucketSize = 100;
 	public int overhang = 5;
@@ -92,5 +93,7 @@ public class BucketsManager : MonoBehaviour {
 
 		Color[] colors = colorManager.UniqueColors(1, usedColors);
 		BuildBucket(colors[0], layer, bucket.Direction);
+
+		tileGroupManager.UpdateTileGroupLayers();
 	}
 }
